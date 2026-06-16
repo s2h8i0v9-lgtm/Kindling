@@ -1,0 +1,22 @@
+# Your secret API key — never upload this
+.env
+
+# Python cache files (auto-generated, not needed on GitHub)
+__pycache__/
+*.pyc
+*.pyo
+
+# Virtual environment folder
+env/
+venv/
+.venv/
+
+# Data files created when the app runs
+data/
+
+# System files
+.DS_Store
+Thumbs.db
+
+# VS Code settings
+.vscode/
