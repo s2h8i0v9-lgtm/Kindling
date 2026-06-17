@@ -1,4 +1,4 @@
-# 🏮 Lantern — Ethical Job Description Builder
+# 🏮 Kindling — Ethical Job Description Builder
 
 > A conversational AI agent that guides employers through writing job descriptions
 > that are honest, inclusive, and ATS-ready — built with the Canadian market in mind.
@@ -11,13 +11,13 @@
 
 Most job description tools help employers write cleaner sentences.
 
-Lantern does something different: it questions whether those sentences are fair,
+Spark Seed does something different: it questions whether those sentences are fair,
 legally aware, and actually attracting the right people — including those who took
 non-linear paths to get here.
 
 ## The seven sections
 
-| # | Section | What the Lantern asks |
+| # | Section | What Spark Seed asks |
 |---|---|---|
 | 1 | The Role | Job title, location, type, salary range |
 | 2 | The Mission | Outcomes and impact, not just duties |
@@ -43,7 +43,7 @@ non-linear paths to get here.
 
 ## Project status
 
-- **Phase 1** — Guided JD builder with Lantern character *(in progress)*
+- **Phase 1** — Guided JD builder with Spark Seed character *(in progress)*
 - Phase 2 — Resume scoring against the JD
 - Phase 3 — Two-sided platform with employer and candidate accounts
 

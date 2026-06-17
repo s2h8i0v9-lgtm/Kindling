@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kindling — Considerate Job Description Builder</title>
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+<div class="app">
+
+    <!-- ── HEADER ─────────────────────────────────── -->
+    <header class="header">
+        <svg class="spark-seed-icon" viewBox="0 0 34 34" fill="none"
+             xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <!-- background tile -->
+            <rect width="34" height="34" rx="9" fill="#E8F5E9"/>
+            <!-- seed body — teardrop pointing down -->
+            <path d="M17 27
+                     C13.5 23.5 10.5 19.5 10.5 14.5
+                     C10.5 10.36 13.36 7 17 7
+                     C20.64 7 23.5 10.36 23.5 14.5
+                     C23.5 19.5 20.5 23.5 17 27Z"
+                  fill="#C8E6C9" stroke="#2E7D32" stroke-width="1.4"/>
+            <!-- inner embryo curve -->
+            <path d="M17 11.5 C15.2 13.5 14.5 16 15 18"
+                  stroke="#2E7D32" stroke-width="1.2"
+                  stroke-linecap="round" fill="none"/>
+            <!-- spark rays at top -->
+            <line x1="17" y1="2.5" x2="17" y2="5"
+                  stroke="#4CAF50" stroke-width="1.5" stroke-linecap="round"/>
+            <line x1="21.2" y1="4"   x2="19.8" y2="6"
+                  stroke="#4CAF50" stroke-width="1.2" stroke-linecap="round"/>
+            <line x1="12.8" y1="4"   x2="14.2" y2="6"
+                  stroke="#4CAF50" stroke-width="1.2" stroke-linecap="round"/>
+        </svg>
+
+        <div class="header-text">
+            <h1>Kindling</h1>
+            <p>Considerate Job Description Builder &middot; Canadian Market</p>
+        </div>
+    </header>
+
+    <!-- ── THREE-PANEL STUDIO ─────────────────────── -->
+    <div class="studio">
+
+        <!-- Icon Rail — section progress dots -->
+        <nav class="icon-rail" aria-label="Section progress">
+
+            <div class="rail-item">
+                <div class="rail-dot active"
+                     data-section="role"
+                     title="1 · The Role"></div>
+                <div class="rail-line"></div>
+            </div>
+
+            <div class="rail-item">
+                <div class="rail-dot"
+                     data-section="mission"
+                     title="2 · The Mission"></div>
+                <div class="rail-line"></div>
+            </div>
+
+            <div class="rail-item">
+                <div class="rail-dot"
+                     data-section="must-haves"
+                     title="3 · Must-Haves"></div>
+                <div class="rail-line"></div>
+            </div>
+
+            <div class="rail-item">
+                <div class="rail-dot"
+                     data-section="nice-to-haves"
+                     title="4 · Nice-to-Haves"></div>
+                <div class="rail-line"></div>
+            </div>
+
+            <div class="rail-item">
+                <div class="rail-dot"
+                     data-section="open-paths"
+                     title="5 · Open Paths"></div>
+                <div class="rail-line"></div>
+            </div>
+
+            <div class="rail-item">
+                <div class="rail-dot"
+                     data-section="reality"
+                     title="6 · The Reality"></div>
+                <div class="rail-line"></div>
+            </div>
+
+            <div class="rail-item">
+                <div class="rail-dot"
+                     data-section="review"
+                     title="7 · Review"></div>
+            </div>
+
+        </nav>
+
+        <!-- Chat Panel -->
+        <main class="chat-panel">
+
+            <!-- Section context bar -->
+            <div class="chat-section-bar">
+                <span class="section-pill"  id="current-section-pill">1 &middot; The Role</span>
+                <span class="section-name-bar" id="current-section-name">Job title, location &amp; employment type</span>
+                <span class="section-hint-bar"  id="section-progress">Step 1 of 7</span>
+            </div>
+
+            <!-- Message thread -->
+            <div class="messages" id="messages" role="log" aria-live="polite"></div>
+
+            <!-- Input -->
+            <div class="input-area">
+                <textarea
+                    id="user-input"
+                    placeholder="Type your answer here…"
+                    rows="1"
+                    aria-label="Your answer"></textarea>
+                <button class="send-btn" id="send-btn" aria-label="Send">Send</button>
+            </div>
+
+        </main>
+
+        <!-- Preview Panel -->
+        <aside class="preview-panel" aria-label="Live job description preview">
+
+            <div class="preview-header">
+                <span class="preview-title">Live Preview</span>
+                <button class="preview-export-btn" id="export-btn">Export &darr;</button>
+            </div>
+
+            <div class="preview-body" id="preview-body">
+
+                <!-- Empty state — shown before any answer is given -->
+                <div class="preview-empty" id="preview-empty">
+                    <svg width="44" height="44" viewBox="0 0 44 44" fill="none"
+                         aria-hidden="true">
+                        <path d="M22 38
+                                 C22 38 11 28 11 19
+                                 C11 12.93 15.93 8 22 8
+                                 C28.07 8 33 12.93 33 19
+                                 C33 28 22 38 22 38Z"
+                              stroke="#2E7D32" stroke-width="1.4" fill="#E8F5E9"/>
+                        <circle cx="22" cy="19" r="4" fill="#C8E6C9"/>
+                        <line x1="22" y1="3"  x2="22" y2="6.5"
+                              stroke="#4CAF50" stroke-width="1.4" stroke-linecap="round"/>
+                        <line x1="26.5" y1="4.5" x2="25" y2="7"
+                              stroke="#4CAF50" stroke-width="1.2" stroke-linecap="round"/>
+                        <line x1="17.5" y1="4.5" x2="19" y2="7"
+                              stroke="#4CAF50" stroke-width="1.2" stroke-linecap="round"/>
+                    </svg>
+                    <p>Your job description grows here as you answer each question.</p>
+                </div>
+
+                <!-- Sections — shown once first answer arrives -->
+                <div id="preview-sections" style="display:none;">
+
+                    <div class="preview-block" id="preview-role">
+                        <div class="preview-block-label">The Role</div>
+                        <div class="preview-block-content empty"
+                             id="preview-role-content">Waiting…</div>
+                    </div>
+
+                    <div class="preview-block" id="preview-mission">
+                        <div class="preview-block-label">The Mission</div>
+                        <div class="preview-block-content empty"
+                             id="preview-mission-content">Waiting…</div>
+                    </div>
+
+                    <div class="preview-block" id="preview-must">
+                        <div class="preview-block-label">Must-Haves</div>
+                        <div class="preview-block-content empty"
+                             id="preview-must-content">Waiting…</div>
+                    </div>
+
+                    <div class="preview-block" id="preview-nice">
+                        <div class="preview-block-label">Nice-to-Haves</div>
+                        <div class="preview-block-content empty"
+                             id="preview-nice-content">Waiting…</div>
+                    </div>
+
+                    <div class="preview-block" id="preview-paths">
+                        <div class="preview-block-label">Open Paths</div>
+                        <div class="preview-block-content empty"
+                             id="preview-paths-content">Waiting…</div>
+                    </div>
+
+                    <div class="preview-block" id="preview-reality">
+                        <div class="preview-block-label">The Reality</div>
+                        <div class="preview-block-content empty"
+                             id="preview-reality-content">Waiting…</div>
+                    </div>
+
+                    <div class="preview-block" id="preview-review">
+                        <div class="preview-block-label">Review Notes</div>
+                        <div class="preview-block-content empty"
+                             id="preview-review-content">Waiting…</div>
+                    </div>
+
+                </div>
+            </div>
+        </aside>
+
+    </div><!-- /.studio -->
+
+    <!--
+        Hidden section nav — kept so existing app.js selectors
+        don't throw errors. Rail dots call the same JS functions
+        in Step 3 (app.js update).
+    -->
+    <div class="sections-nav" aria-hidden="true">
+        <button class="sec-btn active" data-section="role">1 &middot; The Role</button>
+        <button class="sec-btn" data-section="mission">2 &middot; The Mission</button>
+        <button class="sec-btn" data-section="must-haves">3 &middot; Must-Haves</button>
+        <button class="sec-btn" data-section="nice-to-haves">4 &middot; Nice-to-Haves</button>
+        <button class="sec-btn" data-section="open-paths">5 &middot; Open Paths</button>
+        <button class="sec-btn" data-section="reality">6 &middot; The Reality</button>
+        <button class="sec-btn" data-section="review">7 &middot; Review</button>
+    </div>
+
+</div><!-- /.app -->
+
+<script src="/js/app.js"></script>
+</body>
+</html>
