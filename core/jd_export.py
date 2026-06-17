@@ -74,7 +74,7 @@ def generate_jd_text(data):
     )
     lines.append("")
     lines.append("=" * 55)
-    lines.append("Created with Spark Seed — Ethical Job Description Builder")
+    lines.append("Created with Spark Seed — Considerate Job Description Builder")
     lines.append("Designed for the Canadian market.")
     lines.append("=" * 55)
 

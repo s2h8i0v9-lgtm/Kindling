@@ -1,3 +1,4 @@
+import time
 import os
 from flask import Flask, request, jsonify, send_from_directory
 from dotenv import load_dotenv
@@ -76,19 +77,32 @@ def chat():
         parts=[types.Part(text=user_message)]
     ))
 
-    try:
-        response = client.models.generate_content(
-            model='gemini-2.0-flash',
-            contents=contents,
-            config=types.GenerateContentConfig(
-                system_instruction=build_spark_seed_prompt(section)
+    ai_reply   = None
+    last_error = None
+
+    for attempt in range(3):
+        try:
+            response = client.models.generate_content(
+                model='gemini-2.5-flash-lite',
+                contents=contents,
+                config=types.GenerateContentConfig(
+                    system_instruction=build_spark_seed_prompt(section)
+                )
             )
-        )
-        ai_reply = response.text
-    except Exception as e:
+            ai_reply   = response.text
+            last_error = None
+            break
+        except Exception as e:
+            last_error = e
+            if '503' in str(e) or 'UNAVAILABLE' in str(e):
+                time.sleep(3 * (attempt + 1))  # wait a bit longer each retry
+                continue
+            break  # don't bother retrying other error types (e.g. quota)
+
+    if last_error is not None:
         import traceback
         traceback.print_exc()
-        return jsonify({'message': f'[Spark Seed error] {str(e)}'}), 200
+        return jsonify({'message': f'[Spark Seed error] {str(last_error)}', 'error': True}), 200
 
     # Save updated history
     conversation_histories[section_id] = history + [

@@ -144,7 +144,9 @@ async function sendMessage() {
         const data = await res.json();
         removeTyping(typingId);
         addMessage(data.message, 'bot');
-        updatePreview(currentSection, text);
+        if (!data.error) {
+            updatePreview(currentSection, text);
+        }
 
     } catch {
         removeTyping(typingId);
