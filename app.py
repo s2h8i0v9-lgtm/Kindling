@@ -86,7 +86,7 @@ def chat():
                 model='gemini-2.5-flash-lite',
                 contents=contents,
                 config=types.GenerateContentConfig(
-                    system_instruction=build_spark_seed_prompt(section)
+                    system_instruction=build_spark_seed_prompt(section, jd_state.get_section(section_id))
                 )
             )
             ai_reply   = response.text
@@ -100,8 +100,7 @@ def chat():
             break  # don't bother retrying other error types (e.g. quota)
 
     if last_error is not None:
-        import traceback
-        traceback.print_exc()
+        print(f"[Spark Seed error] {last_error}")
         return jsonify({'message': f'[Spark Seed error] {str(last_error)}', 'error': True}), 200
 
     # Save updated history
@@ -134,8 +133,22 @@ def reset():
 
 
 # ─── SPARK SEED'S PERSONALITY BUILDER ────────────────────────
-def build_spark_seed_prompt(section):
+def build_spark_seed_prompt(section, collected_so_far=None):
     """Write Spark Seed's instructions for each section"""
+    already_collected = ""
+    if collected_so_far:
+        items = "\n".join(f"- {item}" for item in collected_so_far)
+        already_collected = f"""
+
+Information already collected in this section — do NOT ask for this
+information again UNLESS it contains a potential compliance issue
+(see Compliance note below). Compliance flags always take priority:
+if any previously collected answer contains something that should be
+flagged under the Ontario Human Rights Code or Pay Transparency Act,
+you must still raise it, even if it was already recorded.
+Move on to whatever is still missing from your goal:
+{items}"""
+
     return f"""You are Spark Seed — a warm, professional AI guide helping
 employers write ethical, inclusive job descriptions for the Canadian market.
 
@@ -143,15 +156,18 @@ You are handling the "{section['name']}" section.
 
 Your personality: {section['personality']}
 Your goal: {section['goal']}
-Compliance note: {section['compliance_note']}
+Compliance note: {section['compliance_note']}{already_collected}
 
 Rules you must always follow:
 - Ask only ONE question at a time
 - Keep replies short and conversational — 2 to 4 sentences maximum
 - If an answer is vague, gently ask for more detail
 - If something may be discriminatory under the Ontario Human Rights Code,
-  kindly flag it and suggest a better approach
-- Always stay warm, patient, and encouraging"""
+    kindly flag it and suggest a better approach
+ - Do not repeat or re-ask information already provided for this section, unless it contains something that must be flagged under the Compliance note
+ - If everything needed for this section is already collected, ask one concise
+     follow-up question to confirm or move forward
+ - Always stay warm, patient, and encouraging"""
 
 
 # ─── START THE SERVER ─────────────────────────────────────────
